@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">NFCBeamEncryptedMessage</string>
+    <string name="title_activity_receiver">Receiver</string>
+</resources>
