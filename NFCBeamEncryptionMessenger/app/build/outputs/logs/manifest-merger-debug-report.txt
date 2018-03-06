@@ -1,0 +1,102 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:2:1-49:12
+INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:2:1-49:12
+INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:2:1-49:12
+INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:2:1-49:12
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /home/guillermo/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/e8197a7af699b84f97fe51339e10f277/AndroidManifest.xml:2:1-11:12
+INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:2:1-49:12
+INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:2:1-49:12
+INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:2:1-49:12
+	package
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:3:5-52
+		INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml
+		INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:2:1-49:12
+		INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:2:1-49:12
+		INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.NFC
+ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:5:5-62
+	android:name
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:5:22-59
+application
+ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:7:5-47:19
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /home/guillermo/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/e8197a7af699b84f97fe51339e10f277/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /home/guillermo/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/e8197a7af699b84f97fe51339e10f277/AndroidManifest.xml:9:5-20
+	android:supportsRtl
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:12:9-35
+	android:label
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:10:9-41
+	android:roundIcon
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:11:9-54
+	android:icon
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:9:9-43
+	android:allowBackup
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:8:9-35
+	android:theme
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:13:9-40
+activity#edu.temple.nfcbeamencryptionmessenger.MainActivity
+ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:16:9-27:20
+	android:label
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:17:13-41
+	android:name
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:16:19-47
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:18:13-21:29
+action#android.intent.action.MAIN
+ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:19:17-69
+	android:name
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:19:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:20:17-77
+	android:name
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:20:27-74
+intent-filter#android.intent.category.DEFAULT+android.nfc.action.NDEF_DISCOVERED
+ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:22:13-26:29
+action#android.nfc.action.NDEF_DISCOVERED
+ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:23:17-77
+	android:name
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:23:25-74
+category#android.intent.category.DEFAULT
+ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:24:17-75
+	android:name
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:24:27-73
+data
+ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:25:17-55
+	android:mimeType
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:25:23-52
+provider#edu.temple.nfcbeamencryptionmessenger.myContentProvider
+ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:30:9-32:81
+	android:authorities
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:32:13-78
+	android:name
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:31:13-46
+activity#edu.temple.nfcbeamencryptionmessenger.ReceiverActivity
+ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:36:9-44:20
+	android:label
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:38:13-39
+	android:name
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml:37:13-45
+uses-sdk
+INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml
+INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /home/guillermo/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/e8197a7af699b84f97fe51339e10f277/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /home/guillermo/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.0.2.aar/e8197a7af699b84f97fe51339e10f277/AndroidManifest.xml:5:5-7:41
+INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml
+INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml
+		INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml
+		ADDED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml
+		INJECTED from /home/guillermo/AndroidStudioProjects/NFCBeamEncryptionMessenger/app/src/main/AndroidManifest.xml
