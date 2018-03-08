@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity
                     //send username to server to
                     //
                     userName.setText(username);
+
                     toasty.dismiss();
                 }
             });
