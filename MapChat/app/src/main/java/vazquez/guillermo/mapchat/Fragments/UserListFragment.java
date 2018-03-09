@@ -3,7 +3,7 @@ package vazquez.guillermo.mapchat.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,22 +26,16 @@ public class UserListFragment extends Fragment {
 
     View v;
     ArrayList<Person> arrayList = new ArrayList<Person>();
-    final Context context = ((MainActivity) getActivity());
-    final ArrayAdapter<Person> arrayAdapter = new ArrayAdapter<Person>(context, android.R.layout.simple_list_item_1, arrayList);
 
 
     public UserListFragment() {
         // Required empty public constructor
     }
 
-    public addToList()
 
-    public static UserListFragment getInstance(String username,int longi, int lat){
+    public static UserListFragment getInstance(){
         UserListFragment userListFragment = new UserListFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("username",username);
-        bundle.putInt("longi",longi);
-        bundle.putInt("lat",lat);
         userListFragment.setArguments(bundle);
         return userListFragment;
     }
@@ -53,6 +47,8 @@ public class UserListFragment extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_user_list,container,false);
         final ListView listView = v.findViewById(R.id.listofusers);
+        final Context context = ((MainActivity) getActivity());
+        ArrayAdapter<Person> arrayAdapter = new ArrayAdapter<Person>(context, android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(arrayAdapter);
 
         //set click listeners for each user

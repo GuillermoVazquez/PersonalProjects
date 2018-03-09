@@ -10,6 +10,10 @@
             android:id="@+id/enterUsername"
             android:icon="@drawable/ic_search_black_24dp"
             android:title="Who are you?" />
+        <item
+            android:id="@+id/map"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Map" />
     </group>
 
     <item android:title="See Who's Nearby">

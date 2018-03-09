@@ -1,8 +1,7 @@
 package vazquez.guillermo.mapchat;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,13 +15,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import vazquez.guillermo.mapchat.Fragments.MapFragment;
+import vazquez.guillermo.mapchat.Fragments.UserListFragment;
+import vazquez.guillermo.mapchat.MapChatObjects.Person;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    //instantiate all things fragments
+    final FragmentManager fragmentManager = getFragmentManager();
+    MapFragment mapFragment = new MapFragment();
+    UserListFragment userListFragment = new UserListFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //attach map at onCreate()
+        fragmentManager.beginTransaction().add(R.id.attachTo,mapFragment).commit();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -79,10 +91,10 @@ public class MainActivity extends AppCompatActivity
                     String username = editText.getText().toString();
                     //set nav header userName
                     TextView userName = findViewById(R.id.userName);
-                    //send username to server to
-                    //
                     userName.setText(username);
-
+                    //todo: send username to server to check if already in
+                    //todo: get longi and lat from google
+                    //todo: server updates
                     toasty.dismiss();
                 }
             });
@@ -95,8 +107,28 @@ public class MainActivity extends AppCompatActivity
         }
         else if (id == R.id.nav_otherUsers){
             //display fragment showing list view of other users
+            if(userListFragment.isAdded()){
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+            }
+            else if(mapFragment.isAdded()){
+                fragmentManager.beginTransaction().remove(mapFragment).commit();
+                fragmentManager.beginTransaction().add(R.id.attachTo,userListFragment).commit();
+            }
         }
-
+        else if(id == R.id.map){
+            //display the map
+            if(mapFragment.isAdded()){
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+            }
+            else if(userListFragment.isAdded()){
+                fragmentManager.beginTransaction().remove(userListFragment).commit();
+                fragmentManager.beginTransaction().add(R.id.attachTo,mapFragment).commit();
+            }
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
