@@ -12,6 +12,9 @@ public class LongiLat {
     double lat;
 
     //create class to get current longilat getLongiLat()
+    public void getlongiLat(){
+
+    };
 
     //create class/thread to update every 10 ft or 30seconds longiLatUpdate
 
