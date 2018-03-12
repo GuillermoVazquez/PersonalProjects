@@ -25,6 +25,7 @@ import vazquez.guillermo.mapchat.R;
 public class UserListFragment extends Fragment {
 
     View v;
+    //populate using OtherUsers
     ArrayList<Person> arrayList = new ArrayList<Person>();
 
 

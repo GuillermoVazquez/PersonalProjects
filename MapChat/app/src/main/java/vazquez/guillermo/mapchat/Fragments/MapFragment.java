@@ -68,15 +68,24 @@ public class MapFragment extends Fragment {
                 }
                 else googleMap.setMyLocationEnabled(true);  // For showing a move to my location button
 
-                //todo: access server and get latlng of nearby users to place markers on map
-                //todo: below code for sydney
-                // For dropping a marker at a point on the Map
-                LatLng sydney = new LatLng(-34, 151);
-                googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
+                //todo: below code for sydney... erase
+                //todo: call LatLong to get current latLong of user and store in person object
+                //todo: update LongiLat every 10ft or 30seconds
+                    //todo: send updates here ( or where needed )
+
+                // For dropping a marker at a point on the Map for current user
+                LatLng user = new LatLng(-34, 151);
+                googleMap.addMarker(new MarkerOptions().position(user).title("Marker Title").snippet("Marker Description"));
+
+                //todo: access server and get username + latlong of 12 nearby users (  by displayU )
+                    //todo: store in-class Person objects
+                //todo: drop pins for each user on map
+                //todo: update displayU every 10ft or 30 seconds
+                    //todo: send updates here ( or where needed )
 
                 //camera
                 // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(user).zoom(12).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
             }

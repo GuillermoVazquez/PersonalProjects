@@ -5,8 +5,8 @@ package vazquez.guillermo.mapchat.MapChatObjects;
  */
 
 public class Person {
-    int Long;
-    int Lat;
+    double Long;
+    double Lat;
     String userName;
 
     public Person(String userName, int Long, int Lat) {
@@ -15,11 +15,11 @@ public class Person {
         this.userName = userName;
     }
 
-    public int getLong() {
+    public double getLong() {
         return Long;
     }
 
-    public int getLat() {
+    public double getLat() {
         return Lat;
     }
 

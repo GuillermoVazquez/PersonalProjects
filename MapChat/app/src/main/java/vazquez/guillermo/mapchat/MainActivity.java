@@ -92,10 +92,12 @@ public class MainActivity extends AppCompatActivity
                     //set nav header userName
                     TextView userName = findViewById(R.id.userName);
                     userName.setText(username);
-                    //todo: send username to server to check if already in
-                    //todo: get longi and lat from google
-                    //todo: server updates
                     toasty.dismiss();
+                    //todo: create person object and set username
+                    //todo: send username to server to check if already in
+                        //todo: handled by Connections
+                    //todo: create class for all longilat uses
+                    //todo: server update if user not in ( user + longilat )
                 }
             });
             cancel.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +118,8 @@ public class MainActivity extends AppCompatActivity
                 fragmentManager.beginTransaction().remove(mapFragment).commit();
                 fragmentManager.beginTransaction().add(R.id.attachTo,userListFragment).commit();
             }
+            //todo: display all users in 25 mile radius in order of proximity ( call displayU() )
+            //todo: create displayU()... should get all nearby users from server and send to UserListFragment
         }
         else if(id == R.id.map){
             //display the map
@@ -128,7 +132,9 @@ public class MainActivity extends AppCompatActivity
                 fragmentManager.beginTransaction().remove(userListFragment).commit();
                 fragmentManager.beginTransaction().add(R.id.attachTo,mapFragment).commit();
             }
+            //todo: get the longilat of user and display drop-pin at location
         }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
