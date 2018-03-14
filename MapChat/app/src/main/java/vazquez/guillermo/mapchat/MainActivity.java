@@ -1,6 +1,7 @@
 package vazquez.guillermo.mapchat;
 
 import android.app.FragmentManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -15,8 +16,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import vazquez.guillermo.mapchat.Fragments.MapFragment;
 import vazquez.guillermo.mapchat.Fragments.UserListFragment;
+import vazquez.guillermo.mapchat.MapChatObjects.LongiLat;
 import vazquez.guillermo.mapchat.MapChatObjects.Person;
 
 public class MainActivity extends AppCompatActivity
@@ -93,10 +97,11 @@ public class MainActivity extends AppCompatActivity
                     TextView userName = findViewById(R.id.userName);
                     userName.setText(username);
                     toasty.dismiss();
-                    //todo: create person object and set username
-                    //todo: send username to server to check if already in
-                        //todo: handled by Connections
-                    //todo: create class for all longilat uses
+                    LongiLat longiLat = new LongiLat();
+                    Connections connections = new Connections();
+                    LatLng latLng = longiLat.getlongiLat(getApplicationContext(),getParent());
+                    Person person = new Person(username,latLng.longitude,latLng.latitude);
+                    connections.postActionCurrentUser(getApplicationContext(),person);
                     //todo: server update if user not in ( user + longilat )
                 }
             });

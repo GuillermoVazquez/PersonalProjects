@@ -11,12 +11,6 @@
     <ListView
         android:id="@+id/listofusers"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="73dp"
-        android:text="This is where the list will go!" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>

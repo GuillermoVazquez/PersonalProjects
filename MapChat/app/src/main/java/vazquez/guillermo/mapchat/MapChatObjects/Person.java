@@ -9,7 +9,7 @@ public class Person {
     double Lat;
     String userName;
 
-    public Person(String userName, int Long, int Lat) {
+    public Person(String userName, double Long, double Lat) {
         this.Long = Long;
         this.Lat = Lat;
         this.userName = userName;

@@ -15,6 +15,7 @@ import android.widget.ListView;
 import java.sql.Array;
 import java.util.ArrayList;
 
+import vazquez.guillermo.mapchat.Connections;
 import vazquez.guillermo.mapchat.MainActivity;
 import vazquez.guillermo.mapchat.MapChatObjects.Person;
 import vazquez.guillermo.mapchat.R;
@@ -26,7 +27,7 @@ public class UserListFragment extends Fragment {
 
     View v;
     //populate using OtherUsers
-    ArrayList<Person> arrayList = new ArrayList<Person>();
+    ArrayList<String> arrayList = new ArrayList<String>();
 
 
     public UserListFragment() {
@@ -49,7 +50,9 @@ public class UserListFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_user_list,container,false);
         final ListView listView = v.findViewById(R.id.listofusers);
         final Context context = ((MainActivity) getActivity());
-        ArrayAdapter<Person> arrayAdapter = new ArrayAdapter<Person>(context, android.R.layout.simple_list_item_1, arrayList);
+        Connections connections = new Connections();
+        arrayList = connections.getActionUserList(getContext());
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(arrayAdapter);
 
         //set click listeners for each user
