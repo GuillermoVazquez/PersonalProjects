@@ -1,10 +1,16 @@
 package vazquez.guillermo.mapchat;
 
+import android.content.Context;
+import android.support.design.widget.Snackbar;
+
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,13 +29,48 @@ import java.net.URL;
 
 public class Connections {
 
+    String urlPost = "https://kamorris.com/lab/register_location.php";
+
+    Context context;
+
+    public void setContext(Context context){
+        this.context = context;
+    }
+
     //GET
     public void getAction() {
-        
+        //sending a simple GET requestS
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String urlGet = "https://kamorris.com/lab/get_locations.php";
+        JsonArrayRequest stringRequest = new JsonArrayRequest(Request.Method.GET, urlGet, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                //this is where you receive the array
+                try{
+                    for (int i = 0; i < response.length(); i++){
+                        //current json object
+                        JSONObject partner = response.getJSONObject(i);
+
+                        //get the current user
+                        String userName = partner.getString("user");
+                        String longi = partner.getString("longitude");
+                        String lati = partner.getString("latitude");
+                    }
+                }catch (Exception e){e.printStackTrace();};
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("ohhh shiiiii couldnt fetch the data...");
+            }
+        });
     }
 
     //POST
     public void postAction(){
+        //sending a simple POST request
 
     }
 
