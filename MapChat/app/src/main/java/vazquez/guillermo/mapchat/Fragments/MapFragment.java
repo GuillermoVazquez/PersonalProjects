@@ -2,9 +2,13 @@ package vazquez.guillermo.mapchat.Fragments;
 
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +23,8 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import vazquez.guillermo.mapchat.MainActivity;
+import vazquez.guillermo.mapchat.MapChatObjects.LongiLat;
 import vazquez.guillermo.mapchat.R;
 
 /**
@@ -29,6 +35,7 @@ public class MapFragment extends Fragment {
     private GoogleMap googleMap;
     MapView mapView;
     View v;
+    LongiLat longiLat = new LongiLat();
 
     public MapFragment() {
         // Required empty public constructor
@@ -65,17 +72,17 @@ public class MapFragment extends Fragment {
 
                 //check for permissions
                 if(ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                 }
                 else googleMap.setMyLocationEnabled(true);  // For showing a move to my location button
 
-                //todo: below code for sydney... erase
-                //todo: call LatLong to get current latLong of user and store in person object
                 //todo: update LongiLat every 10ft or 30seconds
                     //todo: send updates here ( or where needed )
 
                 // For dropping a marker at a point on the Map for current user
-                LatLng user = new LatLng(-34, 151);
-                googleMap.addMarker(new MarkerOptions().position(user).title("Marker Title").snippet("Marker Description"));
+                LatLng user = longiLat.getlongiLat(getContext(),getActivity());
+
+                googleMap.addMarker(new MarkerOptions().position(user).title("You").snippet(""));
 
                 //todo: access server and get username + latlong of 12 nearby users (  by displayU )
                     //todo: store in-class Person objects

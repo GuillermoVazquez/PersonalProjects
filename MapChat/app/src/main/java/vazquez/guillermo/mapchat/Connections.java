@@ -31,14 +31,8 @@ public class Connections {
 
     String urlPost = "https://kamorris.com/lab/register_location.php";
 
-    Context context;
-
-    public void setContext(Context context){
-        this.context = context;
-    }
-
     //GET
-    public void getAction() {
+    public void getActionUserList(Context context) {
         //sending a simple GET requestS
         RequestQueue queue = Volley.newRequestQueue(context);
         String urlGet = "https://kamorris.com/lab/get_locations.php";
@@ -53,8 +47,8 @@ public class Connections {
 
                         //get the current user
                         String userName = partner.getString("user");
-                        String longi = partner.getString("longitude");
-                        String lati = partner.getString("latitude");
+                        Double longi = partner.getDouble("longitude");
+                        Double lati = partner.getDouble("latitude");
                     }
                 }catch (Exception e){e.printStackTrace();};
 
