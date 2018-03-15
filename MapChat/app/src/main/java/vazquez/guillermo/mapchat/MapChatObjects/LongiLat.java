@@ -30,16 +30,16 @@ public class LongiLat {
         //check for permissions
         if(ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(activity,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }else{
+            //get current longilat
+            LocationManager lm = (LocationManager) context.getSystemService(context.LOCATION_SERVICE);
+            Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            double longitude = location.getLongitude();
+            double latitude = location.getLatitude();
+            LatLng user = new LatLng(latitude, longitude);
+            return user;
         }
-
-        //get current longilat
-        LocationManager lm = (LocationManager) context.getSystemService(context.LOCATION_SERVICE);
-        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        double longitude = location.getLongitude();
-        double latitude = location.getLatitude();
-        LatLng user = new LatLng(latitude, longitude);
-
-        return user;
+        return null;
     };
 
     //create class/thread to update every 10 ft or 30seconds longiLatUpdate

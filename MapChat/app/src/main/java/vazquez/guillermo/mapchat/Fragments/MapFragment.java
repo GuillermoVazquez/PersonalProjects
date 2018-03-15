@@ -92,7 +92,7 @@ public class MapFragment extends Fragment {
 
                 //camera
                 // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(user).zoom(12).build();
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(user).zoom(15).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
             }
