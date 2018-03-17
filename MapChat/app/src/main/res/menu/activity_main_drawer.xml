@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/enterUsername"
+            android:icon="@drawable/ic_search_black_24dp"
+            android:title="Who are you?" />
+        <item
+            android:id="@+id/map"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Map" />
+    </group>
+
+    <item android:title="See Who's Nearby">
+        <menu>
+            <item
+                android:id="@+id/nav_otherUsers"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Other Users" />
+        </menu>
+    </item>
+
+</menu>
