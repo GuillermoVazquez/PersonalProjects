@@ -16,7 +16,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.maps.model.LatLng;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 import vazquez.guillermo.mapchat.Fragments.MapFragment;
 import vazquez.guillermo.mapchat.Fragments.UserListFragment;
@@ -98,11 +107,32 @@ public class MainActivity extends AppCompatActivity
                     userName.setText(username);
                     toasty.dismiss();
                     LongiLat longiLat = new LongiLat();
-                    Connections connections = new Connections();
                     LatLng latLng = longiLat.getlongiLat(getApplicationContext(),getParent());
                     Person person = new Person(username,latLng.longitude,latLng.latitude);
-                    connections.postActionCurrentUser(getApplicationContext(),person);
-                    //todo: server update if user not in ( user + longilat )
+
+                    HashMap<String, String> params = new HashMap<String, String>();
+                    params.put("username", username);
+                    params.put("longitude", Double.toString(latLng.longitude));
+                    params.put("latitude", Double.toString(latLng.latitude));
+                    // Define the POST request
+                    String urlPost = "https://kamorris.com/lab/register_location.php";
+                    JsonObjectRequest req = new JsonObjectRequest(urlPost, new JSONObject(params),
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    try {
+                                        VolleyLog.v("Response:%n %s", response.toString(4));
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            VolleyLog.e("Error: ", error.getMessage());
+                        }
+                    });
+
                 }
             });
             cancel.setOnClickListener(new View.OnClickListener() {
@@ -123,8 +153,6 @@ public class MainActivity extends AppCompatActivity
                 fragmentManager.beginTransaction().remove(mapFragment).commit();
                 fragmentManager.beginTransaction().add(R.id.attachTo,userListFragment).commit();
             }
-            //todo: display all users in 25 mile radius in order of proximity ( call displayU() )
-            //todo: create displayU()... should get all nearby users from server and send to UserListFragment
         }
         else if(id == R.id.map){
             //display the map
@@ -137,7 +165,6 @@ public class MainActivity extends AppCompatActivity
                 fragmentManager.beginTransaction().remove(userListFragment).commit();
                 fragmentManager.beginTransaction().add(R.id.attachTo,mapFragment).commit();
             }
-            //todo: get the longilat of user and display drop-pin at location
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

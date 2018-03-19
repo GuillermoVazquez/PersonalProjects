@@ -11,12 +11,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
@@ -42,38 +44,14 @@ import static android.content.ContentValues.TAG;
 
 public class Connections {
 
-    String urlPost = "https://kamorris.com/lab/register_location.php";
+
 
 
 
     //POST
     //this POST will post the current user to the server
     public void postActionCurrentUser(Context context,final Person person){
-        //sending a simple POST request
-        RequestQueue queue = Volley.newRequestQueue(context);
-        String urlPost = "https://kamorris.com/lab/get_locations.php";
-        StringRequest postRequest = new StringRequest(Request.Method.POST, urlPost, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("username",person.getUserName());
-                params.put("longitude",Double.toString(person.getLong()));
-                params.put("longitude",Double.toString(person.getLat()));
-
-                return super.getParams();
-            }
-        };
-        queue.add(postRequest);
 
     }
 
