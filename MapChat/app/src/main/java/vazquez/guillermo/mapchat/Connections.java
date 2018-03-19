@@ -43,18 +43,15 @@ import static android.content.ContentValues.TAG;
 public class Connections {
 
     String urlPost = "https://kamorris.com/lab/register_location.php";
-    ArrayList<String> partners;
 
-    public ArrayList<String> getList(){
-        return partners;
-    }
+
 
     //POST
     //this POST will post the current user to the server
     public void postActionCurrentUser(Context context,final Person person){
         //sending a simple POST request
         RequestQueue queue = Volley.newRequestQueue(context);
-        String urlGet = "https://kamorris.com/lab/get_locations.php";
+        String urlPost = "https://kamorris.com/lab/get_locations.php";
         StringRequest postRequest = new StringRequest(Request.Method.POST, urlPost, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

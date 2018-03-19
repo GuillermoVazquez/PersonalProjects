@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,6 +29,8 @@ import java.util.ArrayList;
 
 import vazquez.guillermo.mapchat.Connections;
 import vazquez.guillermo.mapchat.MainActivity;
+import vazquez.guillermo.mapchat.MapChatObjects.LongiLat;
+import vazquez.guillermo.mapchat.MapChatObjects.OtherUsers;
 import vazquez.guillermo.mapchat.MapChatObjects.Person;
 import vazquez.guillermo.mapchat.R;
 
@@ -60,6 +63,11 @@ public class UserListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        final ArrayList<Person> partners = new ArrayList<Person>();
+        final LongiLat longiLat = new LongiLat();
+        final OtherUsers otherUsers = new OtherUsers();
+        //cordinates of current user
+        LatLng latLng = longiLat.getlongiLat(getContext(),getActivity());
         v = inflater.inflate(R.layout.fragment_user_list,container,false);
         final ArrayList<String> arrayList = new ArrayList<String>();
         final ListView gridView= v.findViewById(R.id.listofusers);
@@ -84,10 +92,13 @@ public class UserListFragment extends Fragment {
                         Double longi = Double.parseDouble(partner.getString("longitude"));
                         Double lati = Double.parseDouble(partner.getString("latitude"));
                         //add Person object to partner list
-                        arrayList.add(userName);
+                        Person person = new Person(userName,longi,lati);
+                        partners.add(person);
                     }
+                    //arrayList now has the partners
+                    //todo: order
+                    arrayList.addAll(otherUsers.order(partners,longiLat.getlongiLat(getContext(),getActivity())));
                     arrayAdapter.notifyDataSetChanged();
-                    System.out.println(arrayList);
 
                 }catch (Exception e){
                     Log.e(TAG, "onResponse: ",e );}
