@@ -1,6 +1,7 @@
 package vazquez.guillermo.mapchat;
 
 import android.app.FragmentManager;
+import android.app.VoiceInteractor;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -16,16 +17,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import vazquez.guillermo.mapchat.Fragments.MapFragment;
 import vazquez.guillermo.mapchat.Fragments.UserListFragment;
@@ -108,31 +115,33 @@ public class MainActivity extends AppCompatActivity
                     toasty.dismiss();
                     LongiLat longiLat = new LongiLat();
                     LatLng latLng = longiLat.getlongiLat(getApplicationContext(),getParent());
-                    Person person = new Person(username,latLng.longitude,latLng.latitude);
+                    final Person person = new Person(username,latLng.longitude,latLng.latitude);
 
-                    HashMap<String, String> params = new HashMap<String, String>();
-                    params.put("username", username);
-                    params.put("longitude", Double.toString(latLng.longitude));
-                    params.put("latitude", Double.toString(latLng.latitude));
+                    RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
                     // Define the POST request
                     String urlPost = "https://kamorris.com/lab/register_location.php";
-                    JsonObjectRequest req = new JsonObjectRequest(urlPost, new JSONObject(params),
-                            new Response.Listener<JSONObject>() {
-                                @Override
-                                public void onResponse(JSONObject response) {
-                                    try {
-                                        VolleyLog.v("Response:%n %s", response.toString(4));
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }, new Response.ErrorListener() {
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, urlPost, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
+                        }
+                    }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            VolleyLog.e("Error: ", error.getMessage());
-                        }
-                    });
 
+                        }
+                    }){
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            HashMap<String, String> params = new HashMap<String, String>();
+                            System.out.println("---------"+person.getUserName());
+                            params.put("user", person.getUserName());
+                            params.put("longitude", Double.toString(person.getLong()));
+                            params.put("latitude", Double.toString(person.getLat()));
+                            return params;
+                        }
+                    };
+                    queue.add(stringRequest);
                 }
             });
             cancel.setOnClickListener(new View.OnClickListener() {
