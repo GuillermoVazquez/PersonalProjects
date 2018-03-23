@@ -46,8 +46,6 @@ public class Connections {
 
 
 
-
-
     //POST
     //this POST will post the current user to the server
     public void postActionCurrentUser(Context context,final Person person){
