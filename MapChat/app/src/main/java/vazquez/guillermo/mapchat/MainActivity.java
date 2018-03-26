@@ -3,6 +3,7 @@ package vazquez.guillermo.mapchat;
 import android.app.FragmentManager;
 import android.app.VoiceInteractor;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -113,6 +114,14 @@ public class MainActivity extends AppCompatActivity
                     TextView userName = findViewById(R.id.userName);
                     userName.setText(username);
                     toasty.dismiss();
+
+                    //send user name to share preference file
+                    SharedPreferences sharedPreferences = getApplicationContext()
+                            .getSharedPreferences("username_file",0);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("username",username);
+                    editor.commit();
+
                     LongiLat longiLat = new LongiLat();
                     LatLng latLng = longiLat.getlongiLat(getApplicationContext(),getParent());
                     final Person person = new Person(username,latLng.longitude,latLng.latitude);

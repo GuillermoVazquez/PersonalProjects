@@ -1,5 +1,8 @@
 package vazquez.guillermo.mapchat.MapChatObjects;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -12,6 +15,8 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import vazquez.guillermo.mapchat.R;
 
 /**
  * Created by guillermo on 3/23/18.
@@ -27,6 +32,12 @@ public class TokenStuff extends FirebaseInstanceIdService {
 
 
     private void sendTokenToServer(final String token){
+        //get the username
+        SharedPreferences sharedPreferences = getApplicationContext()
+                .getSharedPreferences("username_file",0);
+        String defaultValue = "G";
+        final String username = sharedPreferences.getString("username", defaultValue);
+
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         // Define the POST request
         String urlPost = "https://kamorris.com/lab/fcm_register.php";
@@ -44,7 +55,7 @@ public class TokenStuff extends FirebaseInstanceIdService {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> params = new HashMap<String, String>();
-                params.put("user", person.getUserName());
+                params.put("user", username);
                 params.put("token", token);
                 return params;
             }
