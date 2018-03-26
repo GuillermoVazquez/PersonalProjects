@@ -32,12 +32,13 @@ public class MessagingService extends FirebaseMessagingService {
                 //scheduleJob();
             } else {
                 // Handle message within 10 seconds
-                //handleNow();
+                //  handleNow();
             }
 
         }
 
         // Check if message contains a notification payload.
+        //print out the downstream notification from server to test connection
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }

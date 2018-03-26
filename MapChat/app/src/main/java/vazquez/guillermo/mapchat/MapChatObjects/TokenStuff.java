@@ -27,7 +27,8 @@ public class TokenStuff extends FirebaseInstanceIdService {
     @Override
     public void onTokenRefresh() {
         String refreshToken = FirebaseInstanceId.getInstance().getToken();
-        sendTokenToServer(refreshToken);
+        //TODO: implement this to register in some way to server
+        //sendTokenToServer(refreshToken);
     }
 
 
