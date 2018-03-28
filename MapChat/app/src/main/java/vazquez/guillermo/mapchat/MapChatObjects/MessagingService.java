@@ -2,6 +2,7 @@ package vazquez.guillermo.mapchat.MapChatObjects;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -27,6 +28,7 @@ public class MessagingService extends FirebaseMessagingService {
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
 
+
             if (/* Check if data needs to be processed by long running job */ true) {
                 // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
                 //scheduleJob();
@@ -40,6 +42,11 @@ public class MessagingService extends FirebaseMessagingService {
         // Check if message contains a notification payload.
         //print out the downstream notification from server to test connection
         if (remoteMessage.getNotification() != null) {
+            SharedPreferences sharedPreferences = getApplicationContext()
+                    .getSharedPreferences("token_file",0);
+            String defaultValue = "oops";
+            final String token = sharedPreferences.getString("token", defaultValue);
+            Log.d(TAG,"TOKEN: " + token);
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
 

@@ -2,6 +2,10 @@ package vazquez.guillermo.mapchat.MapChatObjects;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.nfc.Tag;
+import android.preference.PreferenceManager;
+import android.provider.SyncStateContract;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -18,16 +22,28 @@ import java.util.Map;
 
 import vazquez.guillermo.mapchat.R;
 
+import static com.android.volley.VolleyLog.TAG;
+
 /**
  * Created by guillermo on 3/23/18.
  */
 
 public class TokenStuff extends FirebaseInstanceIdService {
 
+    //this method fires once on initial app startup
     @Override
     public void onTokenRefresh() {
+        //token here
         String refreshToken = FirebaseInstanceId.getInstance().getToken();
-        //TODO: implement this to register in some way to server
+
+        //save token internally for later usage
+        SharedPreferences sharedPreferences = getApplicationContext()
+                .getSharedPreferences("token_file",0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("token",refreshToken);
+        editor.commit();
+
+        //TODO: implement this to register in some way to server for messaging
         //sendTokenToServer(refreshToken);
     }
 
@@ -63,4 +79,5 @@ public class TokenStuff extends FirebaseInstanceIdService {
         };
         queue.add(stringRequest);
     }
+
 }
