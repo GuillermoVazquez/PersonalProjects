@@ -3,8 +3,14 @@ package vazquez.guillermo.mapchat;
 import android.app.FragmentManager;
 import android.app.VoiceInteractor;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
+import android.nfc.NfcAdapter;
+import android.nfc.NfcEvent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -41,12 +47,13 @@ import vazquez.guillermo.mapchat.MapChatObjects.LongiLat;
 import vazquez.guillermo.mapchat.MapChatObjects.Person;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener , NfcAdapter.CreateNdefMessageCallback {
 
     //instantiate all things fragments
     final FragmentManager fragmentManager = getFragmentManager();
     MapFragment mapFragment = new MapFragment();
     UserListFragment userListFragment = new UserListFragment();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +122,7 @@ public class MainActivity extends AppCompatActivity
                     userName.setText(username);
                     toasty.dismiss();
 
-                    //send user name to share preference file
+                    //send username to share preference file
                     SharedPreferences sharedPreferences = getApplicationContext()
                             .getSharedPreferences("username_file",0);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -188,5 +195,40 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    //nfc messaging implementation
+
+    //create and send nfc message
+    //nfc message content: (username, public key)
+    //message format: username public key
+    @Override
+    public NdefMessage createNdefMessage(NfcEvent nfcEvent) {
+        //get the username
+        SharedPreferences sharedPreferences = getApplicationContext()
+                .getSharedPreferences("username_file",0);
+        String defaultValue = "G";
+        String username = sharedPreferences.getString("username", defaultValue);
+        NdefRecord name = NdefRecord.createMime("text/plain",username.getBytes());
+        NdefRecord key = NdefRecord.createMime("text/plain",publicKeyMessage.getBytes());
+        NdefMessage ndefMessage = new NdefMessage(name,key);
+        return ndefMessage;
+    }
+
+    //receive nfc message
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent intent = getIntent();
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) {
+            Parcelable[] rawMessages = intent.getParcelableArrayExtra(
+                    NfcAdapter.EXTRA_NDEF_MESSAGES);
+
+            NdefMessage message = (NdefMessage) rawMessages[0]; //1 message with 2 records
+            //name byte[] -> string
+            String name = (message.getRecords()[0].getPayload()).toString();
+            //public key byte[] -> string
+            String key = new String(message.getRecords()[1].getPayload());
+            encryptedMessage.setText(encrypt.toString());
     }
 }
