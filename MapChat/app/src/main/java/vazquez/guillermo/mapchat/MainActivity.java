@@ -38,11 +38,14 @@ import com.google.android.gms.maps.model.LatLng;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.KeyPair;
 import java.util.HashMap;
 import java.util.Map;
 
 import vazquez.guillermo.mapchat.Fragments.MapFragment;
 import vazquez.guillermo.mapchat.Fragments.UserListFragment;
+import vazquez.guillermo.mapchat.KeyStuff.Converters;
+import vazquez.guillermo.mapchat.KeyStuff.KeysGenerator;
 import vazquez.guillermo.mapchat.MapChatObjects.LongiLat;
 import vazquez.guillermo.mapchat.MapChatObjects.Person;
 
@@ -60,8 +63,25 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //lets create our public/private key
+        SharedPreferences keyCheck = getSharedPreferences("keys", MODE_PRIVATE);
+        boolean isFirstRun = keyCheck.getBoolean("first_run", true);
+        if (isFirstRun) {
+            //this is the first time running this section of code
+            //put keys in here
+            KeysGenerator keysGenerator = new KeysGenerator();
+            Converters converters = new Converters();
+            keysGenerator.keysSmith();
+            KeyPair keyPair = keysGenerator.getKeyPair();
+            SharedPreferences.Editor editor = keyCheck.edit();
+            //keys -> string
+            editor.putString("public", converters.convertPublicString(keyPair.getPublic()));
+            editor.putString("private", converters.convertPrivateString(keyPair.getPrivate()));
+            editor.commit();
+        }
+
         //attach map at onCreate()
-        fragmentManager.beginTransaction().add(R.id.attachTo,mapFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.attachTo, mapFragment).commit();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -74,6 +94,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        NfcAdapter mAdapter = NfcAdapter.getDefaultAdapter(this);
+        mAdapter.setNdefPushMessageCallback(this, this);
     }
 
     @Override
@@ -106,7 +129,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if(id == R.id.enterUsername){
+        if (id == R.id.enterUsername) {
             //now lets prompt the user for a userName
             final Toasty toasty = new Toasty(this);
             toasty.show();
@@ -124,14 +147,14 @@ public class MainActivity extends AppCompatActivity
 
                     //send username to share preference file
                     SharedPreferences sharedPreferences = getApplicationContext()
-                            .getSharedPreferences("username_file",0);
+                            .getSharedPreferences("username_file", 0);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("username",username);
+                    editor.putString("username", username);
                     editor.commit();
 
                     LongiLat longiLat = new LongiLat();
-                    LatLng latLng = longiLat.getlongiLat(getApplicationContext(),getParent());
-                    final Person person = new Person(username,latLng.longitude,latLng.latitude);
+                    LatLng latLng = longiLat.getlongiLat(getApplicationContext(), getParent());
+                    final Person person = new Person(username, latLng.longitude, latLng.latitude);
 
                     RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
                     // Define the POST request
@@ -146,11 +169,11 @@ public class MainActivity extends AppCompatActivity
                         public void onErrorResponse(VolleyError error) {
 
                         }
-                    }){
+                    }) {
                         @Override
                         protected Map<String, String> getParams() throws AuthFailureError {
                             HashMap<String, String> params = new HashMap<String, String>();
-                            System.out.println("---------"+person.getUserName());
+                            System.out.println("---------" + person.getUserName());
                             params.put("user", person.getUserName());
                             params.put("longitude", Double.toString(person.getLong()));
                             params.put("latitude", Double.toString(person.getLat()));
@@ -166,29 +189,25 @@ public class MainActivity extends AppCompatActivity
                     toasty.dismiss();
                 }
             });
-        }
-        else if (id == R.id.nav_otherUsers){
+        } else if (id == R.id.nav_otherUsers) {
             //display fragment showing list view of other users
-            if(userListFragment.isAdded()){
+            if (userListFragment.isAdded()) {
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
                 return true;
-            }
-            else if(mapFragment.isAdded()){
+            } else if (mapFragment.isAdded()) {
                 fragmentManager.beginTransaction().remove(mapFragment).commit();
-                fragmentManager.beginTransaction().add(R.id.attachTo,userListFragment).commit();
+                fragmentManager.beginTransaction().add(R.id.attachTo, userListFragment).commit();
             }
-        }
-        else if(id == R.id.map){
+        } else if (id == R.id.map) {
             //display the map
-            if(mapFragment.isAdded()){
+            if (mapFragment.isAdded()) {
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
                 return true;
-            }
-            else if(userListFragment.isAdded()){
+            } else if (userListFragment.isAdded()) {
                 fragmentManager.beginTransaction().remove(userListFragment).commit();
-                fragmentManager.beginTransaction().add(R.id.attachTo,mapFragment).commit();
+                fragmentManager.beginTransaction().add(R.id.attachTo, mapFragment).commit();
             }
         }
 
@@ -206,12 +225,14 @@ public class MainActivity extends AppCompatActivity
     public NdefMessage createNdefMessage(NfcEvent nfcEvent) {
         //get the username
         SharedPreferences sharedPreferences = getApplicationContext()
-                .getSharedPreferences("username_file",0);
+                .getSharedPreferences("username_file", 0);
         String defaultValue = "G";
         String username = sharedPreferences.getString("username", defaultValue);
-        NdefRecord name = NdefRecord.createMime("text/plain",username.getBytes());
-        NdefRecord key = NdefRecord.createMime("text/plain",publicKeyMessage.getBytes());
-        NdefMessage ndefMessage = new NdefMessage(name,key);
+        SharedPreferences keysStuff = getSharedPreferences("keys", MODE_PRIVATE);
+        String publicKey = keysStuff.getString("public", "");
+        NdefRecord name = NdefRecord.createMime("text/plain", username.getBytes());
+        NdefRecord key = NdefRecord.createMime("text/plain", publicKey.getBytes());
+        NdefMessage ndefMessage = new NdefMessage(name, key);
         return ndefMessage;
     }
 
@@ -229,6 +250,13 @@ public class MainActivity extends AppCompatActivity
             String name = (message.getRecords()[0].getPayload()).toString();
             //public key byte[] -> string
             String key = new String(message.getRecords()[1].getPayload());
-            encryptedMessage.setText(encrypt.toString());
+
+            //save partner info
+
+            SharedPreferences partnerTouch = getSharedPreferences("partners",MODE_PRIVATE);
+            SharedPreferences.Editor editor = partnerTouch.edit();
+            editor.putString(name,key);
+            editor.commit();
+        }
     }
 }
