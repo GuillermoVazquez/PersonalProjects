@@ -2,7 +2,9 @@ package vazquez.guillermo.mapchat.MessageStuff;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,7 +14,7 @@ import vazquez.guillermo.mapchat.R;
  * Created by guillermo on 3/31/18.
  */
 
-public class MessageListAdapter extends RecyclerView.Adapter {
+/*public class MessageListAdapter extends RecyclerView.Adapter {
     private static final int VIEW_TYPE_MESSAGE_SENT = 1;
     private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
 
@@ -114,4 +116,4 @@ public class MessageListAdapter extends RecyclerView.Adapter {
             nameText.setText(message.getSender().getNickname());
         }
     }
-}
+}*/

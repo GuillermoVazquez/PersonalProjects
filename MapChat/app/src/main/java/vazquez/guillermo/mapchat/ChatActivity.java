@@ -9,11 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import vazquez.guillermo.mapchat.MessageStuff.MessageListAdapter;
+//import vazquez.guillermo.mapchat.MessageStuff.MessageListAdapter;
 
 public class ChatActivity extends AppCompatActivity {
     private RecyclerView mMessageRecycler;
-    private MessageListAdapter mMessageAdapter;
+   // private MessageListAdapter mMessageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         mMessageRecycler = (RecyclerView) findViewById(R.id.reyclerview_message_list);
-        mMessageAdapter = new MessageListAdapter(this, messageList);
+       // mMessageAdapter = new MessageListAdapter(this, messageList);
         mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
     }
 

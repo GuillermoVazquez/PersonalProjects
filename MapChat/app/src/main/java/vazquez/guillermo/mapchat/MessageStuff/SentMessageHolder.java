@@ -9,8 +9,8 @@ import vazquez.guillermo.mapchat.R;
 /**
  * Created by guillermo on 3/31/18.
  */
-
-private class SentMessageHolder extends RecyclerView.ViewHolder {
+//private
+class SentMessageHolder extends RecyclerView.ViewHolder {
     TextView messageText, timeText, nameText;
 
     SentMessageHolder(View itemView) {
@@ -20,11 +20,11 @@ private class SentMessageHolder extends RecyclerView.ViewHolder {
         nameText = (TextView) itemView.findViewById(R.id.text_message_name);
     }
 
-    void bind(UserMessage message) {
+    /*void bind(UserMessage message) {
         messageText.setText(message.getMessage());
 
         // Format the stored timestamp into a readable String using method.
         timeText.setText(Utils.formatDateTime(message.getCreatedAt()));
         nameText.setText(message.getSender().getNickname());
-    }
+    }*/
 }

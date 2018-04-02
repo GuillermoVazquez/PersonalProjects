@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    //nfc messaging implementation
+    //nfc messaging implementation------------------------------------------------------------------
 
     //create and send nfc message
     //nfc message content: (username, public key)
@@ -228,11 +228,19 @@ public class MainActivity extends AppCompatActivity
                 .getSharedPreferences("username_file", 0);
         String defaultValue = "G";
         String username = sharedPreferences.getString("username", defaultValue);
+        //get the public key
         SharedPreferences keysStuff = getSharedPreferences("keys", MODE_PRIVATE);
-        String publicKey = keysStuff.getString("public", "");
-        NdefRecord name = NdefRecord.createMime("text/plain", username.getBytes());
-        NdefRecord key = NdefRecord.createMime("text/plain", publicKey.getBytes());
-        NdefMessage ndefMessage = new NdefMessage(name, key);
+        String publicKey = keysStuff.getString("public","");
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("user",username);
+            jsonObject.put("key",publicKey);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        NdefRecord object = NdefRecord.createMime("application/json",jsonObject.toString().getBytes() );
+        NdefMessage ndefMessage = new NdefMessage(object);
         return ndefMessage;
     }
 
@@ -245,18 +253,22 @@ public class MainActivity extends AppCompatActivity
             Parcelable[] rawMessages = intent.getParcelableArrayExtra(
                     NfcAdapter.EXTRA_NDEF_MESSAGES);
 
-            NdefMessage message = (NdefMessage) rawMessages[0]; //1 message with 2 records
-            //name byte[] -> string
-            String name = (message.getRecords()[0].getPayload()).toString();
-            //public key byte[] -> string
-            String key = new String(message.getRecords()[1].getPayload());
-
-            //save partner info
-
-            SharedPreferences partnerTouch = getSharedPreferences("partners",MODE_PRIVATE);
-            SharedPreferences.Editor editor = partnerTouch.edit();
-            editor.putString(name,key);
-            editor.commit();
+            NdefMessage message = (NdefMessage) rawMessages[0];
+            //get json string
+            String jsonString = (message.getRecords()[0].getPayload()).toString();
+            try {
+                JSONObject jsonObject = new JSONObject(jsonString);
+                String name = jsonObject.getString("name");
+                String publicKey = jsonObject.getString("key");
+                //save partner info
+                SharedPreferences partnerTouch = getSharedPreferences("partners",MODE_PRIVATE);
+                SharedPreferences.Editor editor = partnerTouch.edit();
+                editor.putString("name",name);
+                editor.putString("key",publicKey);
+                editor.commit();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

@@ -29,7 +29,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
 
-                <data android:mimeType="text/plain" />
+                <data android:mimeType="application/json" />
             </intent-filter>
         </activity>
 

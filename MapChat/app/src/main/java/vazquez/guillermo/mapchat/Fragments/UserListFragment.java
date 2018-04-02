@@ -2,6 +2,7 @@ package vazquez.guillermo.mapchat.Fragments;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -36,6 +37,7 @@ import vazquez.guillermo.mapchat.MapChatObjects.Person;
 import vazquez.guillermo.mapchat.R;
 
 import static android.content.ContentValues.TAG;
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -97,7 +99,6 @@ public class UserListFragment extends Fragment {
                         partners.add(person);
                     }
                     //arrayList now has the partners
-                    //todo: order
                     arrayList.addAll(otherUsers.order(partners,longiLat.getlongiLat(getContext(),getActivity())));
                     arrayAdapter.notifyDataSetChanged();
 
@@ -118,11 +119,16 @@ public class UserListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //here you will be able to chat with the nearby users after selection
-                Context context = getContext();
-                CharSequence text = "Hello toast!";
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+                String partnerName = gridView.getItemAtPosition(i).toString();
+
+                //check if user has partnerName public Key
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("partners",MODE_PRIVATE);
+                if(sharedPreferences.contains(partnerName)){
+                    Context context = getContext();
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, partnerName, duration);
+                    toast.show();
+                }
             }
         });
 
