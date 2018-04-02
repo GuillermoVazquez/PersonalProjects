@@ -2,6 +2,7 @@ package vazquez.guillermo.mapchat.Fragments;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -29,6 +30,7 @@ import org.json.JSONObject;
 import java.sql.Array;
 import java.util.ArrayList;
 
+import vazquez.guillermo.mapchat.ChatActivity;
 import vazquez.guillermo.mapchat.Connections;
 import vazquez.guillermo.mapchat.MainActivity;
 import vazquez.guillermo.mapchat.MapChatObjects.LongiLat;
@@ -123,10 +125,17 @@ public class UserListFragment extends Fragment {
 
                 //check if user has partnerName public Key
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("partners",MODE_PRIVATE);
-                if(sharedPreferences.contains(partnerName)){
+                //todo: get rid of !
+                if(!sharedPreferences.contains(partnerName)){
+                    //build intent
+                    Intent intent = new Intent(getContext(),ChatActivity.class);
+                    intent.putExtra("partnerName",partnerName);
+                    //start activity
+                    startActivity(intent);
+                }else{
                     Context context = getContext();
                     int duration = Toast.LENGTH_SHORT;
-                    Toast toast = Toast.makeText(context, partnerName, duration);
+                    Toast toast = Toast.makeText(context, "Meet the other person first! ", duration);
                     toast.show();
                 }
             }
