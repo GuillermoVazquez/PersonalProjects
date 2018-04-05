@@ -2,6 +2,7 @@ package vazquez.guillermo.mapchat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -28,6 +29,9 @@ public class ChatActivity extends AppCompatActivity {
         //get the intent
         Intent intent = getIntent();
         String partnerName = intent.getStringExtra("partnerName");
+        //get partner public key
+        SharedPreferences sharedPreferences = this.getSharedPreferences("partners",MODE_PRIVATE);
+        String partnerKey = sharedPreferences.getString(partnerName,"");
         Context context = this;
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, partnerName, duration);

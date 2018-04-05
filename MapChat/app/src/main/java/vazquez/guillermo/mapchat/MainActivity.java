@@ -263,8 +263,7 @@ public class MainActivity extends AppCompatActivity
                 //save partner info
                 SharedPreferences partnerTouch = getSharedPreferences("partners",MODE_PRIVATE);
                 SharedPreferences.Editor editor = partnerTouch.edit();
-                editor.putString("name",name);
-                editor.putString("key",publicKey);
+                editor.putString(name,publicKey);
                 editor.commit();
             } catch (JSONException e) {
                 e.printStackTrace();

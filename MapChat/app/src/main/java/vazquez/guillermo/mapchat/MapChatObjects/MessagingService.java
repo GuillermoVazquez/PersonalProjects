@@ -9,6 +9,9 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import static com.android.volley.VolleyLog.TAG;
 
 //to receive payloads
@@ -27,15 +30,19 @@ public class MessagingService extends FirebaseMessagingService {
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+            String jsonString = remoteMessage.getData().get("payload");
+            try {
+                JSONObject jsonObject = new JSONObject(jsonString);
+                String partner = jsonObject.getString("from");
+                //encrypted message received as string here in PEM format
+                String message = jsonObject.getString("message");
 
-
-            if (/* Check if data needs to be processed by long running job */ true) {
-                // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
-                //scheduleJob();
-            } else {
-                // Handle message within 10 seconds
-                //  handleNow();
+                //now send to stored messages
+                
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
+
 
         }
 
