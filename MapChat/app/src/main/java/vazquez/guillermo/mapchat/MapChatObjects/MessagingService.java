@@ -53,7 +53,7 @@ public class MessagingService extends FirebaseMessagingService {
                 PublicKey publicKey = converters.convertPublic(publicKeyString);
                 //decrypt the partner message
                 String message = crypto.
-                String message
+                String message;
                 //now send to stored messages
 
             } catch (JSONException e) {

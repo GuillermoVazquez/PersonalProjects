@@ -47,7 +47,6 @@ public class TokenStuff extends FirebaseInstanceIdService {
         //sendTokenToServer(refreshToken);
     }
 
-
     private void sendTokenToServer(final String token){
         //get the username
         SharedPreferences sharedPreferences = getApplicationContext()
