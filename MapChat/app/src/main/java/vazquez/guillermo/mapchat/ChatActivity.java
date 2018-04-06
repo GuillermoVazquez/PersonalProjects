@@ -4,8 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -43,7 +42,7 @@ public class ChatActivity extends AppCompatActivity {
     private final String messagePostUrl = "https://kamorris.com/lab/send_message.php";
     String username = "G";
     private RecyclerView mMessageRecycler;
-    private SharedPreferences sp = getSharedPreferences("keys", MODE_PRIVATE);
+    SharedPreferences sp = getSharedPreferences("keys",0);
     //user private key
     String pk = sp.getString("private","");
     //privateKey String -> privateKey

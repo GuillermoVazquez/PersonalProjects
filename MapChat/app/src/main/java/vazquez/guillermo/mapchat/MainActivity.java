@@ -11,6 +11,7 @@ import android.nfc.NfcAdapter;
 import android.nfc.NfcEvent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -64,9 +65,10 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         //lets create our public/private key
-        SharedPreferences keyCheck = getSharedPreferences("keys", MODE_PRIVATE);
+        SharedPreferences keyCheck = getSharedPreferences("keys",0);
         boolean isFirstRun = keyCheck.getBoolean("first_run", true);
-        if (isFirstRun) {
+        if (!isFirstRun) {
+            System.out.println("first RUNNN");
             //this is the first time running this section of code
             //put keys in here
             KeysGenerator keysGenerator = new KeysGenerator();
@@ -76,7 +78,9 @@ public class MainActivity extends AppCompatActivity
             SharedPreferences.Editor editor = keyCheck.edit();
             //keys -> string
             editor.putString("public", converters.convertPublicString(keyPair.getPublic()));
+            System.out.println(keyCheck.getString("public",""));
             editor.putString("private", converters.convertPrivateString(keyPair.getPrivate()));
+            editor.putBoolean("first_run",false);
             editor.commit();
         }
 
