@@ -94,11 +94,15 @@ public class UserListFragment extends Fragment {
 
                         //get the current user
                         String userName = partner.getString("username");
-                        Double longi = Double.parseDouble(partner.getString("longitude"));
-                        Double lati = Double.parseDouble(partner.getString("latitude"));
-                        //add Person object to partner list
-                        Person person = new Person(userName,longi,lati);
-                        partners.add(person);
+                        try{
+                            Double longi = Double.parseDouble(partner.getString("longitude"));
+                            Double lati = Double.parseDouble(partner.getString("latitude"));
+                            Person person = new Person(userName,longi,lati);
+                            partners.add(person);
+                        }catch (NumberFormatException e){};
+                        try{
+
+                        }catch (NumberFormatException e){};
                     }
                     //arrayList now has the partners
                     arrayList.addAll(otherUsers.order(partners,longiLat.getlongiLat(getContext(),getActivity())));

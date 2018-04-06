@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -13,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 
@@ -25,12 +27,17 @@ import static com.android.volley.VolleyLog.TAG;
 //to send upstream messages
 //to receive notifications
 public class MessagingService extends FirebaseMessagingService {
-    SharedPreferences sharedPreferences = this.getSharedPreferences("partners",MODE_PRIVATE);
-    Crypto crypto = new Crypto();
     Converters converters = new Converters();
+    Crypto crypto = new Crypto();
+    SharedPreferences sharedPreferences = this.getSharedPreferences("partners",MODE_PRIVATE);
+    SharedPreferences userSp = getSharedPreferences("keys", MODE_PRIVATE);
+    String privK = userSp.getString("private","");
+    PrivateKey privateKey = converters.convertPrivate(privK);
+
+
 
     //constructor
-    public MessagingService() {
+    public MessagingService() throws InvalidKeySpecException, NoSuchAlgorithmException {
     }
 
 
@@ -46,21 +53,23 @@ public class MessagingService extends FirebaseMessagingService {
                 String partner = jsonObject.getString("from");
                 //encrypted message received as string here in PEM format
                 String partnerMessage = jsonObject.getString("message");
-                //get partner puclic key
-                //publickey as String
-                String publicKeyString = sharedPreferences.getString(partner,"");
-                //convert public key String to publicKey
-                PublicKey publicKey = converters.convertPublic(publicKeyString);
-                //decrypt the partner message
-                String message = crypto.
-                String message;
-                //now send to stored messages
+                byte[] message = partnerMessage.getBytes();
+                message = crypto.decrypt(privateKey,message);
+                //got the decrypted message
+                String messageReceived = new String(message);
+
+                //create broadcast to chatActivity
+                Intent intent = new Intent("Got Message");
+                intent.putExtra("message",messageReceived);
+                LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
 
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
             } catch (InvalidKeySpecException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
