@@ -18,10 +18,28 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:0.5'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
+
+    // This library handles authentication and authorization
+    compile 'com.spotify.android:auth:1.0.0-alpha'
+
+    // This library handles music playback
+    compile 'com.spotify.sdk:spotify-player-24-noconnect-2.20b@aar'
+
+    //android Spotify web api wrapper
+    //compile 'com.github.kaaes:spotify-web-api-android:0.4.1'
+
+
 }
