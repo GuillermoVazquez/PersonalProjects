@@ -21,7 +21,7 @@ public class MainActivity extends Activity implements
         SpotifyPlayer.NotificationCallback, ConnectionStateCallback
 {
     // TODO: Replace with your client ID
-    private static final String CLIENT_ID = "yourclientid";
+    private static final String CLIENT_ID = "a067472b3bb24cd98495015f3a48693f";
 
     // TODO: Replace with your redirect URI
     private static final String REDIRECT_URI = "yourcustomprotocol://callback";
@@ -74,6 +74,7 @@ public class MainActivity extends Activity implements
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Spotify.destroyPlayer(this);
     }
 
     @Override
@@ -97,7 +98,7 @@ public class MainActivity extends Activity implements
     }
 
     //callback to auth process
-    //onCreat -> onActivityResult -> onLoggedIn
+    //onCreate -> onActivityResult -> onLoggedIn
     @Override
     public void onLoggedIn() {
         Log.d("MainActivity", "User logged in");
