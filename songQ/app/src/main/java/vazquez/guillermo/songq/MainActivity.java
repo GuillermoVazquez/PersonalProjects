@@ -20,11 +20,14 @@ import static com.spotify.sdk.android.authentication.LoginActivity.REQUEST_CODE;
 public class MainActivity extends Activity implements
         SpotifyPlayer.NotificationCallback, ConnectionStateCallback
 {
-    // TODO: Replace with your client ID
     private static final String CLIENT_ID = "a067472b3bb24cd98495015f3a48693f";
 
-    // TODO: Replace with your redirect URI
-    private static final String REDIRECT_URI = "yourcustomprotocol://callback";
+    private static final String REDIRECT_URI = "songq://callback";
+    private String myAccessToken;
+
+    // Request code that will be used to verify if the result comes from correct activity
+    // Can be any integer
+    private static final int REQUEST_CODE = 1337;
 
     private Player mPlayer;
 
