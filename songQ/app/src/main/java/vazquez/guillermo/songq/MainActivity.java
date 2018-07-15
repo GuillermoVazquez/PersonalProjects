@@ -1,6 +1,8 @@
 package vazquez.guillermo.songq;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -17,13 +19,16 @@ import com.spotify.sdk.android.player.SpotifyPlayer;
 
 import static com.spotify.sdk.android.authentication.LoginActivity.REQUEST_CODE;
 
+
 public class MainActivity extends Activity implements
         SpotifyPlayer.NotificationCallback, ConnectionStateCallback
 {
     private static final String CLIENT_ID = "a067472b3bb24cd98495015f3a48693f";
-
     private static final String REDIRECT_URI = "songq://callback";
     private String myAccessToken;
+    Context context = getParent();
+    SharedPreferences sharedPreferences = context.getSharedPreferences("preferences",Context.MODE_PRIVATE);
+
 
     // Request code that will be used to verify if the result comes from correct activity
     // Can be any integer
@@ -56,6 +61,10 @@ public class MainActivity extends Activity implements
         if (requestCode == REQUEST_CODE) {
             AuthenticationResponse response = AuthenticationClient.getResponse(resultCode, intent);
             if (response.getType() == AuthenticationResponse.Type.TOKEN) {
+                //get access token given to user by spotify
+                myAccessToken = response.getAccessToken();
+                //save access token in shared preferences
+                sharedPreferences.edit().putString("access_token",myAccessToken).apply();
                 Config playerConfig = new Config(this, response.getAccessToken(), CLIENT_ID);
                 Spotify.getPlayer(playerConfig, this, new SpotifyPlayer.InitializationObserver() {
                     @Override
