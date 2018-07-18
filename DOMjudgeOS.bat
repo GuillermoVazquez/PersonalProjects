@@ -1,5 +1,3 @@
-REM this is actually a fun batch file that opens a few chrome browser windows
-REM harmless fun
 
 @ECHO OFF
 for /L %%n in (1,1,200) do (start "Chrome" chrome --new-window)
