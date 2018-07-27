@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="vazquez.guillermo.songq.JoinParty">
+    tools:context="vazquez.guillermo.songq.StartParty">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -12,23 +12,24 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Join a Party" />
+            android:text="TextView"
+            tools:text="Enter Party Name" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/editText2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="party name" />
+            android:hint="party" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Join" />
+            android:text="Spotify Signin" />
     </LinearLayout>
 </FrameLayout>
