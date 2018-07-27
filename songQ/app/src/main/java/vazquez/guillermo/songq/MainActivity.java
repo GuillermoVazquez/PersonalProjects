@@ -26,8 +26,8 @@ public class MainActivity extends Activity implements
     private static final String CLIENT_ID = "a067472b3bb24cd98495015f3a48693f";
     private static final String REDIRECT_URI = "songq://callback";
     private String myAccessToken;
-    Context context = getParent();
-    SharedPreferences sharedPreferences = context.getSharedPreferences("preferences",Context.MODE_PRIVATE);
+    private static SharedPreferences sharedPreferences;
+
 
 
     // Request code that will be used to verify if the result comes from correct activity
@@ -40,6 +40,8 @@ public class MainActivity extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        sharedPreferences = getApplicationContext().getSharedPreferences("preferences",Context.MODE_PRIVATE);
 
         AuthenticationRequest.Builder builder = new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
         builder.setScopes(new String[]{"user-read-private", "streaming","playlist-modify-private"});
