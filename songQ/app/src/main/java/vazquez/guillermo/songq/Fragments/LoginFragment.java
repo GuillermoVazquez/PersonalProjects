@@ -17,6 +17,8 @@ import vazquez.guillermo.songq.R;
  */
 public class LoginFragment extends Fragment {
 
+    Communicate communicate;
+
     Button start;
     Button join;
     View v;
@@ -24,6 +26,15 @@ public class LoginFragment extends Fragment {
     public LoginFragment() {
         // Required empty public constructor
     }
+
+    public interface Communicate{
+
+        public void onStart();
+
+        public void onJoin();
+
+    }
+
 
 
     @Override
@@ -36,6 +47,7 @@ public class LoginFragment extends Fragment {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //have the user start a party
                 Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
                 startActivity(intent);
             }
@@ -45,6 +57,8 @@ public class LoginFragment extends Fragment {
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //have the user join a party
+
 
             }
         });

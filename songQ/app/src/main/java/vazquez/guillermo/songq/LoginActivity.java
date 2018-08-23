@@ -12,7 +12,7 @@ import android.widget.Button;
 import vazquez.guillermo.songq.Fragments.JoinFragmnet;
 import vazquez.guillermo.songq.Fragments.LoginFragment;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends Activity implements LoginFragment.Communicate {
 
     protected FragmentManager fragmentManager = getFragmentManager();
     LoginFragment loginFragment = new LoginFragment();
