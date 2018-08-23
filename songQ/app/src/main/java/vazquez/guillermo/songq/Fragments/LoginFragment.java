@@ -17,7 +17,8 @@ import vazquez.guillermo.songq.R;
  */
 public class LoginFragment extends Fragment {
 
-    Button button;
+    Button start;
+    Button join;
     View v;
 
     public LoginFragment() {
@@ -30,15 +31,24 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_login, container, false);
-        button = v.findViewById(R.id.startParty);
+        start = v.findViewById(R.id.startParty);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity().getApplicationContext(),MainActivity.class);
                 startActivity(intent);
             }
         });
+
+        join = v.findViewById(R.id.joinParty);
+        join.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
 
         return v;
 

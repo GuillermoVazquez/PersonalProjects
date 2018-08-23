@@ -15,7 +15,6 @@ import vazquez.guillermo.songq.R;
  */
 public class JoinFragmnet extends Fragment {
 
-    Button button;
     View v;
 
     public JoinFragmnet() {
@@ -28,14 +27,6 @@ public class JoinFragmnet extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_join_fragmnet, container, false);
-        button = v.findViewById(R.id.joinParty);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
         return v;
 
