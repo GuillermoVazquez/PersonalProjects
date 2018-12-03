@@ -1,0 +1,38 @@
+#body{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #262626;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+#container{
+    height: 50%;
+    width: 70%;    
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: auto;
+}
+
+.box{
+    height: 100%;
+    width: 50%;
+    float: left;
+    font-size: 150px;
+    padding-top: 100px;
+    color: white;
+}
+
+u:hover{
+    color: red;
+    font-size: 170px;
+}
+
+#upload{
+    visibility: hidden;
+    color: white;
+    margin-top: 300px;
+}
