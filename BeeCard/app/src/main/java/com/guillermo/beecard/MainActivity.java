@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    //not needed
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    //not needed
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -111,8 +112,15 @@ public class MainActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            TextView title = (TextView) rootView.findViewById(R.id.title);
+
+            if(getArguments().getInt(ARG_SECTION_NUMBER) == 1){
+                //MONEY
+                title.setText("MONEY");
+            }else{
+                title.setText("TIME");
+            }
+
             return rootView;
         }
     }
@@ -136,8 +144,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            // Show 2 total pages.
+            return 2;
         }
     }
 }
