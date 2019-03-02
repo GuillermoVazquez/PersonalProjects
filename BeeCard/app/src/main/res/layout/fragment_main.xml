@@ -22,7 +22,7 @@
             android:id="@+id/subject"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.2"
+            android:layout_weight="1.3"
             android:background="@color/design_default_color_primary"
             android:orientation="vertical">
 
@@ -32,17 +32,75 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text=""
-                android:textColor="white"/>
+                android:textColor="@color/colorAccent"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight=".2"
-            android:background="@android:color/black"
+            android:layout_weight="1.2"
+            android:background="@color/colorAccent"
             android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/one"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="mo. goal"
+                android:textColor="@color/colorAccent"/>
+
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/two"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="made today"
+                android:textColor="@color/colorAccent"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/three"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="made this week"
+                android:textColor="@color/colorAccent"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:background="@color/design_default_color_primary_dark"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/four"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="made this month"
+                android:textColor="@color/colorAccent"/>
+
+        </LinearLayout>
+
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
