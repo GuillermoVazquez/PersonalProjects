@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text=""
-                android:textColor="@color/colorAccent"/>
+                android:textColor="#f1fff4"/>
 
         </LinearLayout>
 
@@ -48,8 +48,8 @@
                 android:id="@+id/one"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="mo. goal"
-                android:textColor="@color/colorAccent"/>
+                android:text="made this month"
+                android:textColor="#f1fff4"/>
 
         </LinearLayout>
         <LinearLayout
@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="made today"
-                android:textColor="@color/colorAccent"/>
+                android:textColor="#f1fff4"/>
 
         </LinearLayout>
         <LinearLayout
@@ -81,7 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="made this week"
-                android:textColor="@color/colorAccent"/>
+                android:textColor="#f1fff4"/>
 
         </LinearLayout>
         <LinearLayout
@@ -96,8 +96,8 @@
                 android:id="@+id/four"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="made this month"
-                android:textColor="@color/colorAccent"/>
+                android:text="month goal"
+                android:textColor="#f1fff4"/>
 
         </LinearLayout>
 

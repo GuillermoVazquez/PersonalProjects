@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -112,13 +113,38 @@ public class MainActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+            LinearLayout top = (LinearLayout) rootView.findViewById(R.id.subject);
+
             TextView title = (TextView) rootView.findViewById(R.id.title);
+
+            TextView one = (TextView) rootView.findViewById(R.id.one);
+            TextView two = (TextView) rootView.findViewById(R.id.two);
+            TextView three = (TextView) rootView.findViewById(R.id.three);
+            TextView four = (TextView) rootView.findViewById(R.id.four);
+
+            top.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //this is where we are gonna get the users hourly wage
+                }
+            });
 
             if(getArguments().getInt(ARG_SECTION_NUMBER) == 1){
                 //MONEY
                 title.setText("MONEY");
+
             }else{
-                title.setText("TIME");
+                //HOURS
+                title.setText("HOURS");
+                //hours done this month
+                one.setText("done this month");
+                //hours to do today
+                two.setText("todo today");
+                //hours to do this week
+                three.setText("todo this week");
+                //hours to do this month
+                four.setText("month goal");
             }
 
             return rootView;
