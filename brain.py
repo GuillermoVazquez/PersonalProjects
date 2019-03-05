@@ -37,10 +37,6 @@ def learn(ballHeight, midHeight,aiHeight):
         if x == 1:
             memory.append([ballHeight,midHeight,aiHeight])
 
-
-
-
-
 #this function simply prints the memory
 def printMemory():
     file = open("fluidMemory.txt","w")
@@ -79,15 +75,3 @@ def react(ai,ball,ballDirX):
         elif ai.centery > POSITION:
             ai.y -= 1
     return ai
-
-
-
-
-
-
-
-
-
-
-
-
